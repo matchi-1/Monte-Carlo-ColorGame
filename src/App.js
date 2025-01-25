@@ -96,7 +96,7 @@ function App() {
         }
         return { result, bet, outcome: result === "WIN" ? bet : -bet };
       });
-  
+      setCurrentBalance(updatedBalance);
       // Save the final balance after the first round
       setFinalBalanceHistory([updatedBalance]); // Only set final balance after computing round outcomes
       setRounds((prevRounds) => [
@@ -139,7 +139,7 @@ function App() {
         }
         return { result, bet, outcome: result === "WIN" ? bet : -bet };
       });
-  
+      setCurrentBalance(updatedBalance);
       // Save the final balance after computing the outcome
       setFinalBalanceHistory((prevBalanceHistory) => [
         ...prevBalanceHistory,
@@ -155,7 +155,7 @@ function App() {
           finalBalance: updatedBalance,
         },
       ]);
-  
+      
       // Increment counter for the next round
       setCounter(counter + 1);
     }
@@ -211,7 +211,10 @@ function App() {
                   min="0"
                   className="input-field"
                   value={initialMoney}
-                  onChange={(e) => setInitialMoney(parseInt(e.target.value))}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setInitialMoney(value === '' ? 0 : parseInt(value, 10));
+                  }}
                   disabled={gameStarted} // Disable input once the game starts
                 />
               </label>
@@ -222,7 +225,10 @@ function App() {
                   min="1"
                   className="input-field"
                   value={minutesPerRound}
-                  onChange={(e) => setMinutesPerRound(parseInt(e.target.value))}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setMinutesPerRound(value === '' ? 1 : parseInt(value, 10));
+                  }}
                   disabled={gameStarted} // Disable input once the game starts
                 />
               </label>
@@ -240,10 +246,19 @@ function App() {
         </div>
 
         <div className="play-time">
-          <h5>Total Play Time: {playTime} minutes</h5>
-          <p>On average, </p>
-          <p>You have been winning/losing: ___ per minute</p>
-          <p>You have been winning/losing: ___ per round</p>
+        <h4>Total Play Time: {playTime} minutes</h4>
+          <h5>
+            You have been {finalBalanceHistory[counter - 1] - initialMoney >= 0 ? "winning" : "losing"}:
+            ${Math.abs(finalBalanceHistory[counter - 1] - initialMoney) > 0 && playTime > 0 
+              ? (Math.abs(finalBalanceHistory[counter - 1] - initialMoney) / playTime).toFixed(2) 
+              : "0.00"} per minute
+          </h5>
+          <h5>
+            You have been {finalBalanceHistory[counter - 1] - initialMoney >= 0 ? "winning" : "losing"}:
+            ${counter > 0 
+              ? (Math.abs(finalBalanceHistory[counter - 1] - initialMoney) / counter).toFixed(2) 
+              : "0.00"} per round
+          </h5>
         </div>
       </div>
 
