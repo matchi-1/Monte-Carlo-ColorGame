@@ -7,48 +7,61 @@ function App() {
     <div className="app-container">
       {/* Left Side */}
       <div className="left-panel">
+
         <img src="/GDSC-Logo.png" className="game-logo" alt="Game Logo" />
         <h1 className="game-title">Monte Carlo Game</h1>
 
-        <form className="betting-form">
-          <label>
-            Initial Money:
-            <input type="number" min="0" className="input-field" />
-          </label>
-          <label>
-            Minutes per Round:
-            <input type="number" min="1" className="input-field" />
-          </label>
-          <label>
-            Bet for Haribot:
-            <input type="number" min="0" className="input-field" />
-          </label>
-          <label>
-            Bet for Siborg:
-            <input type="number" min="0" className="input-field" />
-          </label>
-          <label>
-            Bet for Baby Buster:
-            <input type="number" min="0" className="input-field" />
-          </label>
-          <label>
-            Bet for Honeydroid:
-            <input type="number" min="0" className="input-field" />
-          </label>
-          <label>
-            Bet for Popstron:
-            <input type="number" min="0" className="input-field" />
-          </label>
-        </form>
+        <div className="left-inner-panel">
+          <div className="left-left-panel">
+            <form className="money-time-form">
+              <label>
+                Initial Money:
+                <input type="number" min="0" className="input-field" />
+              </label>
+              <label>
+                Minutes per Round:
+                <input type="number" min="1" className="input-field" />
+              </label>
+            </form>
+
+            <div className="buttons">
+              <button className="action-button">Simulate</button>
+              <button className="action-button">Restart Game</button>
+            </div>
+          </div>
+          
+          <div className="left-right-panel">
+            <form className="betting-form">
+              <label>
+                Bet for Haribot:
+                <input type="number" min="0" className="input-field" />
+              </label>
+              <label>
+                Bet for Siborg:
+                <input type="number" min="0" className="input-field" />
+              </label>
+              <label>
+                Bet for Baby Buster:
+                <input type="number" min="0" className="input-field" />
+              </label>
+              <label>
+                Bet for Honeydroid:
+                <input type="number" min="0" className="input-field" />
+              </label>
+              <label>
+                Bet for Popstron:
+                <input type="number" min="0" className="input-field" />
+              </label>
+            </form>
+          </div>
+        </div>
 
         <div className="play-time">
-          <strong>Total Play Time:</strong> 30 minutes {/* Replace with dynamic value */}
+            <strong>Total Play Time:</strong> 30 minutes {/* Replace with dynamic value */}
         </div>
+        
 
-        <div className="buttons">
-          <button className="action-button">Simulate</button>
-          <button className="action-button">Restart Game</button>
-        </div>
+        
       </div>
 
       {/* Right Side */}

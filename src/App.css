@@ -23,6 +23,19 @@ body {
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
+.left-inner-panel{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.left-left-panel, .left-right-panel{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid red;
+}
+
 .game-logo {
   width: 100px;
   margin-bottom: 20px;
@@ -34,7 +47,7 @@ body {
   margin-bottom: 30px;
 }
 
-.betting-form {
+.betting-form, .money-time-form, .buttons {
   display: flex;
   flex-direction: column;
   gap: 15px;
