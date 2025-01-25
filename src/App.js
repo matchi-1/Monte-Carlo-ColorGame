@@ -287,7 +287,7 @@ function App() {
           <div className="won_lost_text">
             
             {gameStarted
-              ? currentBalance - initialMoney > 0
+              ? currentBalance - initialMoney >= 0
                 ? `Won: $${currentBalance - initialMoney}`
                 : `Lost: -$${Math.abs(currentBalance - initialMoney)}`
               : 0}
