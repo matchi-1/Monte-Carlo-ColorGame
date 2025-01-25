@@ -16,6 +16,7 @@ function App() {
   const [currentBalanceHistory, setCurrentBalanceHistory] = useState([]); // store current balance (final from prev round)
   const [rounds, setRounds] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [playTime, setPlayTime] = useState(0);
   const [counter, setCounter] = useState(0);
 
@@ -110,6 +111,12 @@ function App() {
         return { result, bet, outcome: result === "WIN" ? bet : -bet };
       });
       setCurrentBalance(updatedBalance);
+      setTimeout(() => {
+        if (updatedBalance <= 0) {
+          setGameOver(true);
+          alert("Game Over!");
+        }
+      }, 0);
       // Save the final balance after the first round
       setFinalBalanceHistory([updatedBalance]); // Only set final balance after computing round outcomes
       setRounds((prevRounds) => [
@@ -153,6 +160,12 @@ function App() {
         return { result, bet, outcome: result === "WIN" ? bet : -bet };
       });
       setCurrentBalance(updatedBalance);
+      setTimeout(() => {
+        if (updatedBalance <= 0) {
+          setGameOver(true);
+          alert("Game Over!");
+        }
+      }, 0);
 
       // Save the final balance after computing the outcome
       setFinalBalanceHistory((prevBalanceHistory) => [
@@ -185,6 +198,7 @@ function App() {
     setCurrentBalanceHistory([initialMoney]); // Reset the current balance history
     setRounds([]);
     setPlayTime(0);
+    setGameOver(false);
     setGameStarted(false); // Reset game stat
 
     setBets({
@@ -260,7 +274,7 @@ function App() {
             </form>
 
             <div className="buttons">
-              <button className="simulate-button" onClick={handleSimulate}>
+              <button className="simulate-button" onClick={handleSimulate}  disabled={gameOver}>
                 Simulate
               </button>
               <button className="restart-button" onClick={handleRestart}>
@@ -294,8 +308,9 @@ function App() {
             Starting Balance: ${initialMoney}
           </div>
           <div className="current_balance_text">
-            Current Balance: ${gameStarted ? currentBalance : initialMoney}
-          </div>
+  Current Balance: {gameStarted ? (currentBalance < 0 ? `-$${Math.abs(currentBalance)}` : `$${currentBalance}`) : `$${initialMoney}`}
+</div>
+
           <div className="won_lost_text">
             
             {gameStarted
