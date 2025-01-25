@@ -80,8 +80,12 @@ function App() {
 
     // Check if total bets exceed initial money
     if (totalBets > initialMoney) {
-      alert("Total bet amount exceeds your initial balance! Please adjust your bets.");
+      alert("Total bet amount exceeds your initial balance! Please adjust your bets or initial money.");
       return; // Stop the simulation if the bet amount is invalid
+    }
+    else if(totalBets == 0){
+      alert("Please bet in one or more of the haribons!");
+      return;
     }
 
       // Start the game: Set the initial balance and record the first current balance
