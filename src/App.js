@@ -182,7 +182,28 @@ function App() {
         <img src="/Game-Title.png" className="game-logo" alt="Game Logo" />
         <div className="left-inner-panel">
           <div className="left-left-panel">
-            <form className="money-time-form">
+            
+            <form className="betting-form">
+              {Object.keys(bets).map((bot, index) => (
+                <label key={index}>
+                  Bet for {bot.charAt(0).toUpperCase() + bot.slice(1)} ($):
+                  <input
+                    type="number"
+                    min="0"
+                    className="input-field"
+                    value={bets[bot]}
+                    onChange={(e) =>
+                      setBets({ ...bets, [bot]: Number(e.target.value) })
+                    }
+                  />
+                </label>
+              ))}
+            </form>
+            
+          </div>
+
+          <div className="left-right-panel">
+          <form className="money-time-form">
               <label>
                 Initial Money:
                 <input
@@ -215,25 +236,6 @@ function App() {
                 Restart Game
               </button>
             </div>
-          </div>
-
-          <div className="left-right-panel">
-            <form className="betting-form">
-              {Object.keys(bets).map((bot, index) => (
-                <label key={index}>
-                  Bet for {bot.charAt(0).toUpperCase() + bot.slice(1)} ($):
-                  <input
-                    type="number"
-                    min="0"
-                    className="input-field"
-                    value={bets[bot]}
-                    onChange={(e) =>
-                      setBets({ ...bets, [bot]: Number(e.target.value) })
-                    }
-                  />
-                </label>
-              ))}
-            </form>
           </div>
         </div>
 
