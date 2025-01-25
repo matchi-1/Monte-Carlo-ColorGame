@@ -154,6 +154,27 @@ body {
   gap: 5rem;
 }
 
+.starting_balance_text, .current_balance_text, .won_lost_text{
+  padding: 0.5rem;
+}
+
+.starting_balance_text{
+  padding: 0.5rem;
+}
+
+.current_balance_text{
+  padding: 0.5rem;
+}
+
+.won_lost_text{
+  padding: 0.5rem;
+}
+
+.table-container {
+  max-height: 23rem; 
+  overflow-y: auto; 
+}
+
 .results-table {
   width: 100%;
   border-collapse: collapse;

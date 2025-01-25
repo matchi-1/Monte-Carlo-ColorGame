@@ -278,45 +278,54 @@ function App() {
           <img src="/Haribots.png" className="haribots-image" alt="Game Illustration" />
         </div>
         <div className="player-win-details">
-          <h3>Starting Balance: {initialMoney}</h3>
-          <h3>Current Balance: {gameStarted ? currentBalance : initialMoney}</h3>
-          <h3>Won/Lost: {gameStarted ? currentBalance - initialMoney : 0}</h3>
+          <div className="starting_balance_text">
+            Starting Balance: {initialMoney}
+          </div>
+          <div className="current_balance_text">
+            Current Balance: {gameStarted ? currentBalance : initialMoney}
+          </div>
+          <div className="won_lost_text">
+            Won/Lost: {gameStarted ? currentBalance - initialMoney : 0}
+          </div>
         </div>
-        <table className="results-table">
-          <thead>
-            <tr>
-              <th>Round</th>
-              <th>Spin</th>
-              {/* First Row: Bot Names */}
-              {Object.keys(bets).map((bot, index) => (
-                <th key={index} className={`color-${index % 5}`}>
-                  <div>{bot.charAt(0).toUpperCase() + bot.slice(1)}</div>
-                  <div>{bets[bot] > 0 ? `Current Bet: $${bets[bot]}` : "$0"}</div>
-                </th>
-              ))}
-              <th>Outcome</th>
-              <th>Balance</th>
-              <th>Final</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {rounds.map((round, index) => (
-              <tr key={index}>
-                <td>{round.round}</td>
-                <td>#{round.spin}</td>
-                {round.outcomes.map((outcome, i) => (
-                  <td key={i}>
-                    {outcome.result} (${outcome.bet})
-                  </td>
+        <div className="table-container">
+          <table className="results-table">
+            <thead>
+              <tr>
+                <th>Round</th>
+                <th>Spin</th>
+                {/* First Row: Bot Names */}
+                {Object.keys(bets).map((bot, index) => (
+                  <th key={index} className={`color-${index % 5}`}>
+                    <div>{bot.charAt(0).toUpperCase() + bot.slice(1)}</div>
+                    <div>{bets[bot] > 0 ? `Current Bet: $${bets[bot]}` : "$0"}</div>
+                  </th>
                 ))}
-                <td>{round.roundOutcome}</td>
-                <td>{currentBalanceHistory[index]}</td> {/* Display current dynamic balance */}
-                <td>{finalBalanceHistory[index]}</td> {/* Display final balance (fixed) */}
+                <th>Outcome</th>
+                <th>Balance</th>
+                <th>Final</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {rounds.map((round, index) => (
+                <tr key={index}>
+                  <td>{round.round}</td>
+                  <td>#{round.spin}</td>
+                  {round.outcomes.map((outcome, i) => (
+                    <td key={i}>
+                      {outcome.result} (${outcome.bet})
+                    </td>
+                  ))}
+                  <td>{round.roundOutcome}</td>
+                  <td>{currentBalanceHistory[index]}</td> {/* Display current dynamic balance */}
+                  <td>{finalBalanceHistory[index]}</td> {/* Display final balance (fixed) */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        
       </div>
     </div>
   );
