@@ -182,6 +182,17 @@ function App() {
     setRounds([]);
     setPlayTime(0);
     setGameStarted(false); // Reset game stat
+
+    setBets({
+      haribot: 0,
+      siborg: 0,
+      babyBuster: 0,
+      honeydroid: 0,
+      popstron: 0,
+    });
+  
+    setInitialMoney(0);
+    setMinutesPerRound(1);
   };
 
   return (
