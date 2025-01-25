@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* General App Styling */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: #f5f5f5;
   color: #333;
 }
@@ -19,7 +21,8 @@ body {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center; 
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -34,6 +37,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
 }
+
 
 .game-logo {
   width: 12rem;
@@ -69,9 +73,23 @@ body {
 }
 
 .play-time {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2.5rem;
+  font-size: 0.75rem;
+  border: solid rgb(177, 177, 177) 1px;
+  border-radius: 0.5rem;
+  padding: 0rem 0.5rem;
+}
+
+.play-time p{
+  font-family: sans-serif;
+  margin-top: 0.1rem;
+}
+
+.play-time h5{
+  font-size: 0.85rem;
+  margin: 1rem 0rem;
 }
 
 .buttons {
@@ -112,8 +130,8 @@ body {
   background-color: #f9f9f9;
 }
 
-.game-image {
-  width: 200px;
+.haribots-image {
+  width: 40rem;
   margin-bottom: 20px;
 }
 

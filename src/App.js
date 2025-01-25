@@ -238,16 +238,16 @@ function App() {
         </div>
 
         <div className="play-time">
-          <h4>Total Play Time: {playTime} minutes</h4>
-          <h4>On average, </h4>
-          <h5>You have been winning/losing: ___ per minute</h5>
-          <h5>You have been winning/losing: ___ per round</h5>
+          <h5>Total Play Time: {playTime} minutes</h5>
+          <p>On average, </p>
+          <p>You have been winning/losing: ___ per minute</p>
+          <p>You have been winning/losing: ___ per round</p>
         </div>
       </div>
 
       {/* Right Side */}
       <div className="right-panel">
-        <img src="/Haribots.png" className="game-image" alt="Game Illustration" />
+        <img src="/Haribots.png" className="haribots-image" alt="Game Illustration" />
         <div className="player-win-details">
           <h3>Starting Balance: {initialMoney}</h3>
           <h3>Current Balance: {gameStarted ? currentBalance : initialMoney}</h3>
