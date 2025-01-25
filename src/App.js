@@ -125,10 +125,15 @@ function App() {
         if (updatedBalance <= 0) {
           setGameOver(true);
           
+          // Calculate total rounds played and amount to pay
+          const totalRoundsPlayed = counter+1; // The total rounds played so far
+         
           // Prepare the summary message
           const summaryMessage = `
             Game Over!
-            Your balance has reached ${updatedBalance}, better luck next time!
+            Your balance has reached ${updatedBalance < 0 ? '-$' : '$'}${Math.abs(updatedBalance)}.
+            Total rounds played: ${totalRoundsPlayed}.
+            Better luck next time!
           `;
           
           alert(summaryMessage);
@@ -182,10 +187,15 @@ function App() {
         if (updatedBalance <= 0) {
           setGameOver(true);
           
+          // Calculate total rounds played and amount to pay
+          const totalRoundsPlayed = counter+1; // The total rounds played so far
+        
           // Prepare the summary message
           const summaryMessage = `
             Game Over!
-            Your balance has reached ${updatedBalance}, better luck next time!
+            Your balance has reached ${updatedBalance < 0 ? '-$' : '$'}${Math.abs(updatedBalance)}.
+            Total rounds played: ${totalRoundsPlayed}.
+            Better luck next time!
           `;
           
           alert(summaryMessage);
