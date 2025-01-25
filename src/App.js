@@ -203,7 +203,7 @@ function App() {
           </div>
 
           <div className="left-right-panel">
-          <form className="money-time-form">
+            <form className="money-time-form">
               <label>
                 Initial Money:
                 <input
@@ -235,10 +235,10 @@ function App() {
             </form>
 
             <div className="buttons">
-              <button className="action-button" onClick={handleSimulate}>
+              <button className="simulate-button" onClick={handleSimulate}>
                 Simulate
               </button>
-              <button className="action-button" onClick={handleRestart}>
+              <button className="restart-button" onClick={handleRestart}>
                 Restart Game
               </button>
             </div>
@@ -246,25 +246,27 @@ function App() {
         </div>
 
         <div className="play-time">
-        <h4>Total Play Time: {playTime} minutes</h4>
-          <h5>
+        <h5>Total Play Time: {playTime} minutes</h5>
+          <p>
             You have been {finalBalanceHistory[counter - 1] - initialMoney >= 0 ? "winning" : "losing"}:
             ${Math.abs(finalBalanceHistory[counter - 1] - initialMoney) > 0 && playTime > 0 
               ? (Math.abs(finalBalanceHistory[counter - 1] - initialMoney) / playTime).toFixed(2) 
               : "0.00"} per minute
-          </h5>
-          <h5>
+          </p>
+          <p>
             You have been {finalBalanceHistory[counter - 1] - initialMoney >= 0 ? "winning" : "losing"}:
             ${counter > 0 
               ? (Math.abs(finalBalanceHistory[counter - 1] - initialMoney) / counter).toFixed(2) 
               : "0.00"} per round
-          </h5>
+          </p>
         </div>
       </div>
 
       {/* Right Side */}
       <div className="right-panel">
-        <img src="/Haribots.png" className="haribots-image" alt="Game Illustration" />
+        <div className="haribot-img-wrapper">
+          <img src="/Haribots.png" className="haribots-image" alt="Game Illustration" />
+        </div>
         <div className="player-win-details">
           <h3>Starting Balance: {initialMoney}</h3>
           <h3>Current Balance: {gameStarted ? currentBalance : initialMoney}</h3>
@@ -277,9 +279,9 @@ function App() {
               <th>Spin</th>
               {/* First Row: Bot Names */}
               {Object.keys(bets).map((bot, index) => (
-                <th key={index}>
-                  <div>{bot.charAt(0).toUpperCase() + bot.slice(1)}</div> {/* Bot Name */}
-                  <div>{bets[bot] > 0 ? `Current Bet: $${bets[bot]}` : "$0"}</div> {/* Current Bet */}
+                <th key={index} className={`color-${index % 5}`}>
+                  <div>{bot.charAt(0).toUpperCase() + bot.slice(1)}</div>
+                  <div>{bets[bot] > 0 ? `Current Bet: $${bets[bot]}` : "$0"}</div>
                 </th>
               ))}
               <th>Outcome</th>

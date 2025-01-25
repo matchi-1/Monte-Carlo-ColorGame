@@ -106,7 +106,18 @@ body {
   margin-top: auto; 
 }
 
-.action-button {
+.simulate-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #00ae3d;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.restart-button {
   padding: 10px 20px;
   font-size: 16px;
   color: white;
@@ -149,19 +160,46 @@ body {
   text-align: left;
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 0.85rem;
 }
 
 .results-table th,
 .results-table td {
-  border: 1px solid #ddd;
+  border: 0.4rem solid #ffffff;
   padding: 10px;
+  background-color: white;
 }
 
 .results-table th {
-  background-color: #007bff;
+  background-color: #7d7d7d;
   color: #ffffff;
 }
 
 .results-table tbody tr:nth-child(even) {
   background-color: #f2f2f2;
+}
+
+.results-table th.color-0 {
+  background-color: #eeeeee;
+  color: black;
+}
+
+.results-table th.color-1 {
+  background-color: #d14f4f;
+  color: white;
+}
+
+.results-table th.color-2 {
+  background-color: #4bba67;
+  color: white;
+}
+
+.results-table th.color-3 {
+  background-color: #f1cf51;
+  color: white;
+}
+
+.results-table th.color-4 {
+  background-color: #3c99d7;
+  color: white;
 }
