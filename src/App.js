@@ -16,6 +16,7 @@ function App() {
   const [currentBalanceHistory, setCurrentBalanceHistory] = useState([]); // store current balance (final from prev round)
   const [rounds, setRounds] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [playTime, setPlayTime] = useState(0);
   const [counter, setCounter] = useState(0);
 
@@ -73,6 +74,14 @@ function App() {
   ];
 
   const handleSimulate = () => {
+      // Calculate the total of all bets
+    const totalBets = Object.values(bets).reduce((sum, bet) => sum + bet, 0);
+
+    // Check if total bets exceed initial money
+    if (totalBets > initialMoney) {
+      alert("Total bet amount exceeds your initial balance! Please adjust your bets.");
+      return; // Stop the simulation if the bet amount is invalid
+    }
     if (!gameStarted) {
 
       // Start the game: Set the initial balance and record the first current balance
@@ -140,6 +149,12 @@ function App() {
         return { result, bet, outcome: result === "WIN" ? bet : -bet };
       });
       setCurrentBalance(updatedBalance);
+      setTimeout(() => {
+        if (updatedBalance <= 0) {
+          setGameOver(true);
+          alert("Game Over!");
+        }
+      }, 0); // Timeout ensures state updates are applied before the check
       // Save the final balance after computing the outcome
       setFinalBalanceHistory((prevBalanceHistory) => [
         ...prevBalanceHistory,
@@ -172,6 +187,7 @@ function App() {
     setRounds([]);
     setPlayTime(0);
     setGameStarted(false); // Reset game state
+    setGameOver(false);
   };
 
   return (
@@ -235,7 +251,7 @@ function App() {
             </form>
 
             <div className="buttons">
-              <button className="simulate-button" onClick={handleSimulate}>
+              <button className="action-button" onClick={handleSimulate} disabled={gameOver}>
                 Simulate
               </button>
               <button className="restart-button" onClick={handleRestart}>
@@ -255,7 +271,7 @@ function App() {
           </p>
           <p>
             You have been {finalBalanceHistory[counter - 1] - initialMoney >= 0 ? "winning" : "losing"}:
-            ${counter > 0 
+            ${counter > 0 && Math.abs(finalBalanceHistory[counter - 1] - initialMoney) > 0 && playTime > 0
               ? (Math.abs(finalBalanceHistory[counter - 1] - initialMoney) / counter).toFixed(2) 
               : "0.00"} per round
           </p>

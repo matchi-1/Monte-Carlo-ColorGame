@@ -131,6 +131,13 @@ body {
 .action-button:hover {
   background-color: #0056b3;
 }
+.action-button:disabled {
+  background-color: #ccc; /* Greyed-out background */
+  color: #888; /* Muted text color */
+  cursor: not-allowed; /* Change the cursor to indicate it's not clickable */
+  pointer-events: none; /* Disable hover effects */
+  transition: none; /* Remove animations for disabled state */
+}
 
 /* Right Panel */
 
