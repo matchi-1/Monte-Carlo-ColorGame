@@ -20,6 +20,16 @@ function App() {
   const [playTime, setPlayTime] = useState(0);
   const [counter, setCounter] = useState(0);
 
+  const totalPlayTime = playTime;
+  const currentBalanceChange = finalBalanceHistory[counter - 1] - initialMoney;
+  const winOrLose = currentBalanceChange >= 0 ? "winning" : "losing";
+  const playTimeRate = totalPlayTime > 0 && Math.abs(currentBalanceChange) > 0 
+    ? (Math.abs(currentBalanceChange) / totalPlayTime).toFixed(2)
+    : "0.00";
+  const roundRate = counter > 0 && Math.abs(currentBalanceChange) > 0 && totalPlayTime > 0 
+    ? (Math.abs(currentBalanceChange) / counter).toFixed(2) 
+    : "0.00";
+
   const winLoseMatrix = [
     ["WIN", "WIN", "WIN", "WIN", "WIN"],
     ["WIN", "LOSE", "WIN", "WIN", "LOSE"],
@@ -85,7 +95,7 @@ function App() {
       return; // Stop the simulation if the bet amount is invalid
     }
     else if(totalBets == 0){
-      alert("Please bet in one or more of the haribons!");
+      alert("Please bet in one or more of the haribots!");
       return;
     }
 
@@ -114,7 +124,14 @@ function App() {
       setTimeout(() => {
         if (updatedBalance <= 0) {
           setGameOver(true);
-          alert("Game Over!");
+          
+          // Prepare the summary message
+          const summaryMessage = `
+            Game Over!
+            Your balance has reached ${updatedBalance}, better luck next time!
+          `;
+          
+          alert(summaryMessage);
         }
       }, 0);
       // Save the final balance after the first round
@@ -129,11 +146,11 @@ function App() {
           finalBalance: updatedBalance,
         },
       ]);
-  
       // Increment counter for the next round
       setCounter(1);
       setGameStarted(true); // Mark the game as started
     } else {
+
       // For subsequent rounds, use the last final balance as the current balance
       const previousFinalBalance = finalBalanceHistory[counter - 1];
       setCurrentBalance(previousFinalBalance); // Set the balance for the next round
@@ -159,11 +176,19 @@ function App() {
         }
         return { result, bet, outcome: result === "WIN" ? bet : -bet };
       });
+
       setCurrentBalance(updatedBalance);
       setTimeout(() => {
         if (updatedBalance <= 0) {
           setGameOver(true);
-          alert("Game Over!");
+          
+          // Prepare the summary message
+          const summaryMessage = `
+            Game Over!
+            Your balance has reached ${updatedBalance}, better luck next time!
+          `;
+          
+          alert(summaryMessage);
         }
       }, 0);
 
@@ -183,12 +208,15 @@ function App() {
         },
       ]);
       
+
       // Increment counter for the next round
       setCounter(counter + 1);
     }
   
     // Update playtime (assumed to increment based on each round)
     setPlayTime((prevTime) => prevTime + minutesPerRound);
+    
+
   };
   
 
@@ -252,7 +280,7 @@ function App() {
                   value={initialMoney}
                   onChange={(e) => {
                     const value = e.target.value;
-                    setInitialMoney(value === '' ? 0 : parseInt(value, 10));
+                    setInitialMoney(value === '' ? 0 : parseInt(value));
                   }}
                   disabled={gameStarted} // Disable input once the game starts
                 />
@@ -266,7 +294,7 @@ function App() {
                   value={minutesPerRound}
                   onChange={(e) => {
                     const value = e.target.value;
-                    setMinutesPerRound(value === '' ? 1 : parseInt(value, 10));
+                    setMinutesPerRound(value === '' ? 1 : parseInt(value));
                   }}
                   disabled={gameStarted} // Disable input once the game starts
                 />
@@ -285,18 +313,12 @@ function App() {
         </div>
 
         <div className="play-time">
-        <h5>Total Play Time: {playTime} minutes</h5>
+        <h5>Total Play Time: {totalPlayTime} minutes</h5>
           <p>
-            You have been {finalBalanceHistory[counter - 1] - initialMoney >= 0 ? "winning" : "losing"}:
-            ${Math.abs(finalBalanceHistory[counter - 1] - initialMoney) > 0 && playTime > 0 
-              ? (Math.abs(finalBalanceHistory[counter - 1] - initialMoney) / playTime).toFixed(2) 
-              : "0.00"} per minute
+            You have been {winOrLose}: ${playTimeRate} per minute
           </p>
           <p>
-            You have been {finalBalanceHistory[counter - 1] - initialMoney >= 0 ? "winning" : "losing"}:
-            ${counter > 0 && Math.abs(finalBalanceHistory[counter - 1] - initialMoney) > 0 && playTime > 0
-              ? (Math.abs(finalBalanceHistory[counter - 1] - initialMoney) / counter).toFixed(2) 
-              : "0.00"} per round
+            You have been {winOrLose}: ${roundRate} per round
           </p>
         </div>
       </div>
