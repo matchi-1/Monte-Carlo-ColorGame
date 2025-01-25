@@ -178,9 +178,8 @@ function App() {
     <div className="app-container">
       {/* Left Side */}
       <div className="left-panel">
-        <img src="/GDSC-Logo.png" className="game-logo" alt="Game Logo" />
-        <h1 className="game-title">Monte Carlo Game</h1>
-
+        {/*<img src="/GDSC-Logo.png" className="game-logo" alt="Game Logo" />*/}
+        <img src="/Game-Title.png" className="game-logo" alt="Game Logo" />
         <div className="left-inner-panel">
           <div className="left-left-panel">
             <form className="money-time-form">
