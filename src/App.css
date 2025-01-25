@@ -33,7 +33,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border: 1px solid red;
 }
 
 .game-logo {
@@ -50,13 +49,15 @@ body {
 .betting-form, .money-time-form, .buttons {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1rem;
 }
 
-.betting-form label {
+
+
+.betting-form label, .money-time-form label{
   display: flex;
   flex-direction: column;
-  font-size: 16px;
+  font-size: 0.9rem;
 }
 
 .input-field {
@@ -95,6 +96,13 @@ body {
 }
 
 /* Right Panel */
+
+.player-win-details{
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+}
+
 .right-panel {
   flex: 2;
   padding: 20px;
