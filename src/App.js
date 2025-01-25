@@ -11,12 +11,13 @@ function App() {
     honeydroid: 0,
     popstron: 0,
   });
-  const [currentBalance, setCurrentBalance] = useState(0); // This tracks the current balance (changes every round)
-  const [finalBalanceHistory, setFinalBalanceHistory] = useState([]); // To store final balances for each round (fixed)
-  const [currentBalanceHistory, setCurrentBalanceHistory] = useState([]); // To store the dynamic current balance
+  const [currentBalance, setCurrentBalance] = useState(0); // tracks the current balance (changes every round)
+  const [finalBalanceHistory, setFinalBalanceHistory] = useState([]); // store final balances for each round 
+  const [currentBalanceHistory, setCurrentBalanceHistory] = useState([]); // store current balance (final from prev round)
   const [rounds, setRounds] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
   const [playTime, setPlayTime] = useState(0);
+  const [counter, setCounter] = useState(0);
 
   const winLoseMatrix = [
     ["WIN", "WIN", "WIN", "WIN", "WIN"],
@@ -73,60 +74,96 @@ function App() {
 
   const handleSimulate = () => {
     if (!gameStarted) {
+
+      // Start the game: Set the initial balance and record the first current balance
       setCurrentBalance(initialMoney); // Set initial balance when first simulated
-      setFinalBalanceHistory([initialMoney]); // Store initial balance as the first "final" balance
       setCurrentBalanceHistory([initialMoney]); // Store initial balance as the first "current" balance
+  
+      // Compute outcome for the first round
+      let updatedBalance = initialMoney; // Start with the initial balance
+      const spin = Math.floor(Math.random() * 50); // Generate a random spin between 1-50
+      const results = winLoseMatrix[spin];
+  
+      let roundOutcome = 0;
+      const outcomeArray = results.map((result, index) => {
+        const bet = Object.values(bets)[index];
+        if (result === "WIN") {
+          roundOutcome += bet;
+          updatedBalance += bet; // Add the bet to the balance if WIN
+        } else {
+          roundOutcome -= bet;
+          updatedBalance -= bet; // Subtract the bet from the balance if LOSE
+        }
+        return { result, bet, outcome: result === "WIN" ? bet : -bet };
+      });
+  
+      // Save the final balance after the first round
+      setFinalBalanceHistory([updatedBalance]); // Only set final balance after computing round outcomes
+      setRounds((prevRounds) => [
+        ...prevRounds,
+        {
+          round: 1,
+          spin: spin + 1,
+          outcomes: outcomeArray,
+          roundOutcome,
+          finalBalance: updatedBalance,
+        },
+      ]);
+  
+      // Increment counter for the next round
+      setCounter(1);
       setGameStarted(true); // Mark the game as started
     } else {
-      // Set current balance to the last final balance from the previous round
-      setCurrentBalance(finalBalanceHistory[finalBalanceHistory.length - 1]);
+      // For subsequent rounds, use the last final balance as the current balance
+      const previousFinalBalance = finalBalanceHistory[counter - 1];
+      setCurrentBalance(previousFinalBalance); // Set the balance for the next round
+      setCurrentBalanceHistory((prevCurrentBalanceHistory) => [
+        ...prevCurrentBalanceHistory,
+        previousFinalBalance,
+      ]);
+  
+      // Compute the outcome for the current round
+      let updatedBalance = previousFinalBalance; // Start with the previous round's final balance
+      const spin = Math.floor(Math.random() * 50); // Generate a random spin between 1-50
+      const results = winLoseMatrix[spin];
+  
+      let roundOutcome = 0;
+      const outcomeArray = results.map((result, index) => {
+        const bet = Object.values(bets)[index];
+        if (result === "WIN") {
+          roundOutcome += bet;
+          updatedBalance += bet; // Add the bet to the balance if WIN
+        } else {
+          roundOutcome -= bet;
+          updatedBalance -= bet; // Subtract the bet from the balance if LOSE
+        }
+        return { result, bet, outcome: result === "WIN" ? bet : -bet };
+      });
+  
+      // Save the final balance after computing the outcome
+      setFinalBalanceHistory((prevBalanceHistory) => [
+        ...prevBalanceHistory,
+        updatedBalance,
+      ]);
+      setRounds((prevRounds) => [
+        ...prevRounds,
+        {
+          round: counter + 1,
+          spin: spin + 1,
+          outcomes: outcomeArray,
+          roundOutcome,
+          finalBalance: updatedBalance,
+        },
+      ]);
+  
+      // Increment counter for the next round
+      setCounter(counter + 1);
     }
-
-    // Generate a random spin between 1-5
-    const spin = Math.floor(Math.random() * 5);
-    const results = winLoseMatrix[spin];
-    
-    // Calculate outcomes for this round and determine the final balance
-    let roundOutcome = 0;
-    let updatedBalance = currentBalance; // Start with the current balance
-    
-    const outcomeArray = results.map((result, index) => {
-      const bet = Object.values(bets)[index];
-      if (result === "WIN") {
-        roundOutcome += bet;
-        updatedBalance += bet;
-      } else {
-        roundOutcome -= bet;
-        updatedBalance -= bet;
-      }
-      return { result, bet, outcome: result === "WIN" ? bet : -bet };
-    });
-
-    // Update the rounds with the outcome
-    setRounds((prevRounds) => [
-      ...prevRounds,
-      {
-        round: prevRounds.length + 1,
-        spin: spin + 1,
-        outcomes: outcomeArray,
-        roundOutcome,
-        finalBalance: updatedBalance, // Store the final balance for this round
-      },
-    ]);
-    
-    // Save the final balance to the finalBalanceHistory array (fixed, will not change)
-    setFinalBalanceHistory((prevBalanceHistory) => [...prevBalanceHistory, updatedBalance]);
-
-    // Save the current balance (final of previous round) to the currentBalanceHistory
-    setCurrentBalanceHistory((prevCurrentBalanceHistory) => [
-      ...prevCurrentBalanceHistory,
-      updatedBalance,
-    ]);
-
-    // Update the current balance
-    setCurrentBalance(updatedBalance);
+  
+    // Update playtime (assumed to increment based on each round)
     setPlayTime((prevTime) => prevTime + minutesPerRound);
   };
+  
 
   const handleRestart = () => {
     setCurrentBalance(initialMoney);
