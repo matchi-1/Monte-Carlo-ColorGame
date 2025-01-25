@@ -274,9 +274,6 @@ function App() {
 
       {/* Right Side */}
       <div className="right-panel">
-        <div className="haribot-img-wrapper">
-          <img src="/Haribots.png" className="haribots-image" alt="Game Illustration" />
-        </div>
         <div className="player-win-details">
           <div className="starting_balance_text">
             Starting Balance: ${initialMoney}
@@ -290,10 +287,15 @@ function App() {
               ? currentBalance - initialMoney >= 0
                 ? `Won: $${currentBalance - initialMoney}`
                 : `Lost: -$${Math.abs(currentBalance - initialMoney)}`
-              : 0}
+              : `Won: 0`}
           
           </div>
         </div>
+
+        <div className="haribot-img-wrapper">
+          <img src="/Haribots.png" className="haribots-image" alt="Game Illustration" />
+        </div>
+        
         <div className="table-container">
           <table className="results-table">
             <thead>
@@ -324,8 +326,8 @@ function App() {
                     </td>
                   ))}
                   <td>{round.roundOutcome}</td>
-                  <td>{currentBalanceHistory[index]}</td> {/* Display current dynamic balance */}
-                  <td>{finalBalanceHistory[index]}</td> {/* Display final balance (fixed) */}
+                  <td>{currentBalanceHistory[index]}</td> 
+                  <td>{finalBalanceHistory[index]}</td> 
                 </tr>
               ))}
             </tbody>
