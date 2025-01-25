@@ -251,8 +251,8 @@ function App() {
         <img src="/Haribots.png" className="game-image" alt="Game Illustration" />
         <div className="player-win-details">
           <h3>Starting Balance: {initialMoney}</h3>
-          <h3>Current Balance: {currentBalance}</h3>
-          <h3>Won/Lost: {currentBalance - initialMoney}</h3>
+          <h3>Current Balance: {gameStarted ? currentBalance : initialMoney}</h3>
+          <h3>Won/Lost: {gameStarted ? currentBalance - initialMoney : 0}</h3>
         </div>
         <table className="results-table">
           <thead>
