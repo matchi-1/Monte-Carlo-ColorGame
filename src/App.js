@@ -1,14 +1,13 @@
 import React from "react";
 import "./App.css";
-import logo from "./logo.svg"; // Replace with your game logo
-//import gameImage from "./game-image.svg"; // Replace with your image for the right side
+
 
 function App() {
   return (
     <div className="app-container">
       {/* Left Side */}
       <div className="left-panel">
-      {/* <img src={logo} className="game-logo" alt="Game Logo" />*/}
+        <img src="/GDSC-Logo.png" className="game-logo" alt="Game Logo" />
         <h1 className="game-title">Monte Carlo Game</h1>
 
         <form className="betting-form">
@@ -40,16 +39,21 @@ function App() {
             Bet for Popstron:
             <input type="number" min="0" className="input-field" />
           </label>
-          <label>
-            Total Play Time:
-            <input type="number" min="1" className="input-field" />
-          </label>
         </form>
+
+        <div className="play-time">
+          <strong>Total Play Time:</strong> 30 minutes {/* Replace with dynamic value */}
+        </div>
+
+        <div className="buttons">
+          <button className="action-button">Simulate</button>
+          <button className="action-button">Restart Game</button>
+        </div>
       </div>
 
       {/* Right Side */}
       <div className="right-panel">
-        {/*<img src={gameImage} className="game-image" alt="Game Illustration" />*/}
+        <img src="/Haribots.png" className="game-image" alt="Game Illustration" />
         <table className="results-table">
           <thead>
             <tr>
