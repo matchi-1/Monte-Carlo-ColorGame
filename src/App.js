@@ -279,13 +279,19 @@ function App() {
         </div>
         <div className="player-win-details">
           <div className="starting_balance_text">
-            Starting Balance: {initialMoney}
+            Starting Balance: ${initialMoney}
           </div>
           <div className="current_balance_text">
-            Current Balance: {gameStarted ? currentBalance : initialMoney}
+            Current Balance: ${gameStarted ? currentBalance : initialMoney}
           </div>
           <div className="won_lost_text">
-            Won/Lost: {gameStarted ? currentBalance - initialMoney : 0}
+            
+            {gameStarted
+              ? currentBalance - initialMoney > 0
+                ? `Won: $${currentBalance - initialMoney}`
+                : `Lost: -$${Math.abs(currentBalance - initialMoney)}`
+              : 0}
+          
           </div>
         </div>
         <div className="table-container">
