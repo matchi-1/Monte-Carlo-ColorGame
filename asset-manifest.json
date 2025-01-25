@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Monte-Carlo-ColorGame/static/css/main.aecf09c2.css",
+    "main.js": "/Monte-Carlo-ColorGame/static/js/main.8ed0c824.js",
+    "static/js/488.28fb94f5.chunk.js": "/Monte-Carlo-ColorGame/static/js/488.28fb94f5.chunk.js",
+    "index.html": "/Monte-Carlo-ColorGame/index.html",
+    "main.aecf09c2.css.map": "/Monte-Carlo-ColorGame/static/css/main.aecf09c2.css.map",
+    "main.8ed0c824.js.map": "/Monte-Carlo-ColorGame/static/js/main.8ed0c824.js.map",
+    "488.28fb94f5.chunk.js.map": "/Monte-Carlo-ColorGame/static/js/488.28fb94f5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aecf09c2.css",
+    "static/js/main.8ed0c824.js"
+  ]
+}
