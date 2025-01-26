@@ -256,7 +256,7 @@ function App() {
       {/* Left Side */}
       <div className="left-panel">
         {/*<img src="/GDSC-Logo.png" className="game-logo" alt="Game Logo" />*/}
-        <img src="/Game-Title.png" className="game-logo" alt="Game Logo" />
+        <img src={`${process.env.PUBLIC_URL}/Game-Title.png`} className="game-logo" alt="Game Logo" />
         <div className="left-inner-panel">
           <div className="left-left-panel">
             
@@ -355,7 +355,7 @@ function App() {
         </div>
 
         <div className="haribot-img-wrapper">
-          <img src="/Haribots.png" className="haribots-image" alt="Game Illustration" />
+          <img src={`${process.env.PUBLIC_URL}/Haribots.png`} className="haribots-image" alt="Game Illustration" />
         </div>
         
         <div className="table-container">
