@@ -11,4 +11,4 @@ HariBet is an app that combines the thrill of color betting with the power of th
 ### Check out instructions and screenshots here:  [Documentation](https://docs.google.com/document/d/12CR1PcL_Evp-gc_3MajztSp2eaOAhzew_eLPqg5kjd4/edit?tab=t.0)
 
 
-### Visit the App here:  [Website](monte-carlo-color-game.vercel.app)
+### Visit the App here:  [Website](https://monte-carlo-color-game.vercel.app/)
